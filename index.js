@@ -61,7 +61,7 @@ function generateHTML(){
 // *** Renderers
 function showResults(result){
   result.forEach(function(value, index){
-    STORE.thumbnails.push(value.snippet.thumbnails.default);
+    STORE.thumbnails.push(value.snippet.thumbnails.default.url);
   });
   generateHTML();
 }
