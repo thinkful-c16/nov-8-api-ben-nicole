@@ -6,7 +6,8 @@ $(document).ready(function(){
 
 const STORE = {
   // currentState: 'listening', //searching, querying, displaying
-  thumbnails: []
+  thumbnails: [],
+  videoURLS: []
 };
 
 // function render(STORE) {
@@ -31,6 +32,7 @@ function queryAPI(query) {
   $.getJSON(url, params, function(data) {
     // data.items[i].snippet.thumbnails;
     showResults(data.items);
+    console.log(data);
   });
 }
 
@@ -48,13 +50,13 @@ function getSearchTerms() {
 
 // *** Template Generators
 function template(){
-  console.log(STORE.thumbnails[0]);
+  console.log(STORE.videoURLS);
   return `<ul>
-    <li><img src="${STORE.thumbnails[0]}" alt="thumb 1"></li>
-    <li><img src="${STORE.thumbnails[1]}" alt="thumb 2"></li>
-    <li><img src="${STORE.thumbnails[2]}" alt="thumb 3"></li>
-    <li><img src="${STORE.thumbnails[3]}" alt="thumb 4"></li>
-    <li><img src="${STORE.thumbnails[4]}" alt="thumb 5"></li>
+    <li><a href="${STORE.videoURLS[0]}"><img src="${STORE.thumbnails[0]}" alt="thumb 1"></a></li>
+    <li><a href="${STORE.videoURLS[1]}"><img src="${STORE.thumbnails[1]}" alt="thumb 2"></a></li>
+    <li><a href="${STORE.videoURLS[2]}"><img src="${STORE.thumbnails[2]}" alt="thumb 3"></a></li>
+    <li><a href="${STORE.videoURLS[3]}"><img src="${STORE.thumbnails[3]}" alt="thumb 4"></a></li>
+    <li><a href="${STORE.videoURLS[4]}"><img src="${STORE.thumbnails[4]}" alt="thumb 5"></a></li>
   </ul>`;
 }
 
@@ -62,6 +64,7 @@ function template(){
 function showResults(result){
   result.forEach(function(value, index){
     STORE.thumbnails.push(value.snippet.thumbnails.default.url);
+    STORE.videoURLS.push('https://www.youtube.com/watch?v='+value.id.videoId)
   });
   generateHTML();
 }
