@@ -5,7 +5,7 @@ $(document).ready(function(){
 });
 
 const STORE = {
-  currentState: 'listening', //searching, querying, displaying
+  // currentState: 'listening', //searching, querying, displaying
   thumbnails: []
 };
 
@@ -15,8 +15,8 @@ const STORE = {
 //   }
 // }
 
-const apiEndpoint = 'https://www.googleapis.com/youtube/v3/videos';
-const apiKey = '7lCDEYXw3mM&key=AIzaSyC2kJstPC4GVBdBqd6pnVB-dSd7febN2Js';
+const apiEndpoint = 'https://www.googleapis.com/youtube/v3/search';
+const apiKey = 'AIzaSyC2kJstPC4GVBdBqd6pnVB-dSd7febN2Js';
 
 // *** Query results object:S
 
@@ -29,8 +29,8 @@ function queryAPI(query) {
   };
   let url = apiEndpoint;
   $.getJSON(url, params, function(data) {
-    console.log(data);
-    // showResults(data.items)
+    // data.items[i].snippet.thumbnails;
+    showResults(data.items);
   });
 }
 
@@ -47,10 +47,24 @@ function getSearchTerms() {
 }
 
 // *** Template Generators
-
+function generateHTML(){
+  console.log(STORE.thumbnails);
+  // `<ul>
+  //   <li><img src=${} alt="thumb 1"></li>
+  //   <li><img src=${} alt="thumb 2"></li>
+  //   <li><img src=${} alt="thumb 3"></li>
+  //   <li><img src=${} alt="thumb 4"></li>
+  //   <li><img src=${} alt="thumb 5"></li>
+  // </ul>`
+}
 
 // *** Renderers
-
+function showResults(result){
+  result.forEach(function(value, index){
+    STORE.thumbnails.push(value.snippet.thumbnails.default);
+  });
+  generateHTML();
+}
 
 // function getDataFromApi(searchTerm, callback) {
 //   const query = {
