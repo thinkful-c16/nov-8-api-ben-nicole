@@ -47,15 +47,15 @@ function getSearchTerms() {
 }
 
 // *** Template Generators
-function generateHTML(){
-  console.log(STORE.thumbnails);
-  // `<ul>
-  //   <li><img src=${} alt="thumb 1"></li>
-  //   <li><img src=${} alt="thumb 2"></li>
-  //   <li><img src=${} alt="thumb 3"></li>
-  //   <li><img src=${} alt="thumb 4"></li>
-  //   <li><img src=${} alt="thumb 5"></li>
-  // </ul>`
+function template(){
+  console.log(STORE.thumbnails[0]);
+  return `<ul>
+    <li><img src="${STORE.thumbnails[0]}" alt="thumb 1"></li>
+    <li><img src="${STORE.thumbnails[1]}" alt="thumb 2"></li>
+    <li><img src="${STORE.thumbnails[2]}" alt="thumb 3"></li>
+    <li><img src="${STORE.thumbnails[3]}" alt="thumb 4"></li>
+    <li><img src="${STORE.thumbnails[4]}" alt="thumb 5"></li>
+  </ul>`;
 }
 
 // *** Renderers
@@ -64,6 +64,11 @@ function showResults(result){
     STORE.thumbnails.push(value.snippet.thumbnails.default.url);
   });
   generateHTML();
+}
+
+function generateHTML() {
+  $('.thumbnails').html(template());
+  console.log('Test String');
 }
 
 // function getDataFromApi(searchTerm, callback) {
