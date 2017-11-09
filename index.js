@@ -40,9 +40,11 @@ function getSearchTerms() {
     queryAPI(searchTerm);
   });
 }
+//**************update this getSearchTerms function to clear the store before populating it
 
-//*********************Set getSearchTerms to clear the store before populating it! */
-
+//*******************************************************************************************
+//**********************   Updated to populate vai result counter   *************************
+//*******************************************************************************************
 // *** Template Generators
 function template(){
   console.log(STORE.videoURLS.length);
@@ -51,15 +53,14 @@ function template(){
     listMaker.push(`<li><a href="${STORE.videoURLS[i]}"><img src="${STORE.thumbnails[i]}" alt="thumb 1"></a></li>`)
   }
   let listString = listMaker.toString().replace(/,/g, " ");
-  //listString.replace(/,/g, " ");
-  console.log(listString);
-
   return `<ul>
     ${listString}
   </ul>`;
 }
+//*******************************************************************************************
+//**********************   Updated to populate vai result counter   *************************
+//*******************************************************************************************
 
-//**********************************************CHANGE THIS TO LOOP TO POPULATE! */
 
 // *** Renderers
 function showResults(result){
