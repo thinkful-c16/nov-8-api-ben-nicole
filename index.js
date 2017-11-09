@@ -1,4 +1,5 @@
 'use strict';
+//api key: AIzaSyC2kJstPC4GVBdBqd6pnVB-dSd7febN2Js
 
 $(document).ready(function(){
   getSearchTerms();
@@ -10,17 +11,10 @@ const STORE = {
   videoURLS: []
 };
 
-// function render(STORE) {
-//   if (STORE.currentState === 'listening') {
-
-//   }
-// }
-
 const apiEndpoint = 'https://www.googleapis.com/youtube/v3/search';
 const apiKey = 'AIzaSyC2kJstPC4GVBdBqd6pnVB-dSd7febN2Js';
 
 // *** Query results object:S
-
 function queryAPI(query) {
   let params = {
     part: 'snippet',
@@ -37,7 +31,6 @@ function queryAPI(query) {
 }
 
 // *** Event listener/handler
-
 function getSearchTerms() {
   $('#search-button').submit(function(event) {
     event.preventDefault();
@@ -48,17 +41,25 @@ function getSearchTerms() {
   });
 }
 
+//*********************Set getSearchTerms to clear the store before populating it! */
+
 // *** Template Generators
 function template(){
-  console.log(STORE.videoURLS);
+  console.log(STORE.videoURLS.length);
+  let listMaker = [];
+  for (let i = 0; i < STORE.videoURLS.length; i++) {
+    listMaker.push(`<li><a href="${STORE.videoURLS[i]}"><img src="${STORE.thumbnails[i]}" alt="thumb 1"></a></li>`)
+  }
+  let listString = listMaker.toString().replace(/,/g, " ");
+  //listString.replace(/,/g, " ");
+  console.log(listString);
+
   return `<ul>
-    <li><a href="${STORE.videoURLS[0]}"><img src="${STORE.thumbnails[0]}" alt="thumb 1"></a></li>
-    <li><a href="${STORE.videoURLS[1]}"><img src="${STORE.thumbnails[1]}" alt="thumb 2"></a></li>
-    <li><a href="${STORE.videoURLS[2]}"><img src="${STORE.thumbnails[2]}" alt="thumb 3"></a></li>
-    <li><a href="${STORE.videoURLS[3]}"><img src="${STORE.thumbnails[3]}" alt="thumb 4"></a></li>
-    <li><a href="${STORE.videoURLS[4]}"><img src="${STORE.thumbnails[4]}" alt="thumb 5"></a></li>
+    ${listString}
   </ul>`;
 }
+
+//**********************************************CHANGE THIS TO LOOP TO POPULATE! */
 
 // *** Renderers
 function showResults(result){
@@ -71,18 +72,5 @@ function showResults(result){
 
 function generateHTML() {
   $('.thumbnails').html(template());
-  console.log('Test String');
 }
 
-// function getDataFromApi(searchTerm, callback) {
-//   const query = {
-//     q: `${searchTerm} in:name`,
-//     per_page: 5
-//   }
-//   $.getJSON(GITHUB_SEARCH_URL, query, callback);
-// }
-
-
-
-
-//api key: AIzaSyC2kJstPC4GVBdBqd6pnVB-dSd7febN2Js
