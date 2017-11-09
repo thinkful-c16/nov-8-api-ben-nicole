@@ -60,6 +60,8 @@ function template(){
   </ul>`;
 }
 
+//loop over the data in li, and then add a click event 
+
 // *** Renderers
 function showResults(result){
   result.forEach(function(value, index){
