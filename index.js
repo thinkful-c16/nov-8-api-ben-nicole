@@ -51,13 +51,11 @@ function getSearchTerms() {
 // *** Template Generators
 function template(){
   console.log(STORE.videoURLS);
-  return `<ul>
-    <li><a href="${STORE.videoURLS[0]}"><img src="${STORE.thumbnails[0]}" alt="thumb 1"></a></li>
-    <li><a href="${STORE.videoURLS[1]}"><img src="${STORE.thumbnails[1]}" alt="thumb 2"></a></li>
-    <li><a href="${STORE.videoURLS[2]}"><img src="${STORE.thumbnails[2]}" alt="thumb 3"></a></li>
-    <li><a href="${STORE.videoURLS[3]}"><img src="${STORE.thumbnails[3]}" alt="thumb 4"></a></li>
-    <li><a href="${STORE.videoURLS[4]}"><img src="${STORE.thumbnails[4]}" alt="thumb 5"></a></li>
-  </ul>`;
+  const urlValue = STORE.videoURLS.map(function(value){
+    return `<li><a href="${value}">`;});
+  const thumbnailValue = STORE.thumbnails.map(function(value){
+    return `<img src="${value}" alt="thumbnail text here"></a></li>`;});
+  return `<ul>${urlValue}${thumbnailValue}</ul>`;
 }
 
 //loop over the data in li, and then add a click event 
