@@ -5,21 +5,14 @@ $(document).ready(function(){
 });
 
 const STORE = {
-  // currentState: 'listening', //searching, querying, displaying
   thumbnails: [],
   videoURLS: []
 };
 
-// function render(STORE) {
-//   if (STORE.currentState === 'listening') {
-
-//   }
-// }
-
 const apiEndpoint = 'https://www.googleapis.com/youtube/v3/search';
 const apiKey = 'AIzaSyC2kJstPC4GVBdBqd6pnVB-dSd7febN2Js';
 
-// *** Query results object:S
+// *** Query results object:
 
 function queryAPI(query) {
   let params = {
@@ -30,7 +23,6 @@ function queryAPI(query) {
   };
   let url = apiEndpoint;
   $.getJSON(url, params, function(data) {
-    // data.items[i].snippet.thumbnails;
     showResults(data.items);
     console.log(data);
   });
@@ -58,31 +50,28 @@ function template(){
   return `<ul>${urlValue}${thumbnailValue}</ul>`;
 }
 
-//loop over the data in li, and then add a click event 
-
 // *** Renderers
-function showResults(result){
-  result.forEach(function(value, index){
-    STORE.thumbnails.push(value.snippet.thumbnails.default.url);
-    STORE.videoURLS.push('https://www.youtube.com/watch?v='+value.id.videoId)
+// function showResults(result){
+//   result.forEach(function(value, index){
+//     STORE.thumbnails.push(value.snippet.thumbnails.default.url);
+//     STORE.videoURLS.push('https://www.youtube.com/watch?v='+value.id.videoId)
+//   });
+//   generateHTML();
+// }
+
+function showResults(result) {
+  STORE.thumbnails.map(thumbnail => {
+    STORE.videoURLS.map(video => {
+      console.log(thumbnail);
+      console.log(video);
+      return (
+        thumbnail, video
+      );
+    });
   });
   generateHTML();
 }
 
 function generateHTML() {
   $('.thumbnails').html(template());
-  console.log('Test String');
 }
-
-// function getDataFromApi(searchTerm, callback) {
-//   const query = {
-//     q: `${searchTerm} in:name`,
-//     per_page: 5
-//   }
-//   $.getJSON(GITHUB_SEARCH_URL, query, callback);
-// }
-
-
-
-
-//api key: AIzaSyC2kJstPC4GVBdBqd6pnVB-dSd7febN2Js
