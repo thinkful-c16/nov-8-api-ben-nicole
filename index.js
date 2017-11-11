@@ -41,31 +41,20 @@ function getSearchTerms() {
 }
 
 // *** Template Generators
-function template(){
-  console.log(STORE.videoURLS);
-  const urlValue = STORE.videoURLS.map(function(value){
-    return `<li><a href="${value}">`;});
-  const thumbnailValue = STORE.thumbnails.map(function(value){
-    return `<img src="${value}" alt="thumbnail text here"></a></li>`;});
-  return `<ul>${urlValue}${thumbnailValue}</ul>`;
-}
-
-// *** Renderers
-// function showResults(result){
-//   result.forEach(function(value, index){
-//     STORE.thumbnails.push(value.snippet.thumbnails.default.url);
-//     STORE.videoURLS.push('https://www.youtube.com/watch?v='+value.id.videoId)
-//   });
-//   generateHTML();
+// function template(){
+//   console.log(STORE.videoURLS);
+//   const urlValue = STORE.videoURLS.map(function(value){
+//     return `<li><a href="${value}">`;});
+//   const thumbnailValue = STORE.thumbnails.map(function(value){
+//     return `<img src="${value}" alt="thumbnail text here"></a></li>`;});
+//   return `<ul>${urlValue}${thumbnailValue}</ul>`;
 // }
 
-function showResults(result) {
+function template() {
   STORE.thumbnails.map(thumbnail => {
     STORE.videoURLS.map(video => {
-      console.log(thumbnail);
-      console.log(video);
       return (
-        thumbnail, video
+        `<li><a href="${STORE.videoURL}"><img src="${STORE.thumnails}" alt="thumbnail text here"></a></li>`
       );
     });
   });
@@ -75,3 +64,13 @@ function showResults(result) {
 function generateHTML() {
   $('.thumbnails').html(template());
 }
+
+// *** Renderers
+function showResults(result){
+  result.forEach(function(value, index){
+    STORE.thumbnails.push(value.snippet.thumbnails.default.url);
+    STORE.videoURLS.push('https://www.youtube.com/watch?v='+value.id.videoId)
+  });
+  generateHTML();
+}
+
