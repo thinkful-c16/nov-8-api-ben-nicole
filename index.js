@@ -54,7 +54,7 @@ function template() {
   STORE.thumbnails.map(thumbnail => {
     STORE.videoURLS.map(video => {
       return (
-        `<li><a href="${STORE.videoURL}"><img src="${STORE.thumnails}" alt="thumbnail text here"></a></li>`
+        `<li><a href="${video}"><img src="${thumbnail}" alt="thumbnail text here"></a></li>`
       );
     });
   });
